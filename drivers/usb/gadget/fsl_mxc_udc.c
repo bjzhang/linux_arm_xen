@@ -18,6 +18,8 @@
 #include <linux/platform_device.h>
 #include <linux/io.h>
 
+#include "../../../arch/arm/mach-imx/hardware.h"
+
 static struct clk *mxc_ahb_clk;
 static struct clk *mxc_per_clk;
 static struct clk *mxc_ipg_clk;
