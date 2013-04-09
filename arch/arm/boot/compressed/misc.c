@@ -25,7 +25,7 @@ unsigned int __machine_arch_type;
 static void putstr(const char *ptr);
 extern void error(char *x);
 
-#ifdef CONFIG_ARCH_MULTIPLATFORM
+#if defined(CONFIG_ARCH_MULTIPLATFORM) || defined(CONFIG_XEN)
 static inline void putc(int c) {}
 static inline void flush(void) {}
 static inline void arch_decomp_setup(void) {}
