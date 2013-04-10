@@ -30,6 +30,7 @@
 #include <mach/irqs.h>
 #include <mach/regs-mct.h>
 #include <asm/mach/time.h>
+#include <xen/xen.h>
 
 #define TICK_BASE_CNT	1
 
@@ -469,7 +470,7 @@ static void __init exynos4_timer_resources(void)
 
 void __init exynos4_timer_init(void)
 {
-	if (soc_is_exynos5440()) {
+	if (soc_is_exynos5440() || xen_domain()) {
 		arch_timer_of_register();
 		return;
 	}
