@@ -11,6 +11,7 @@
 #include <linux/kernel.h>
 #include <linux/console.h>
 #include <linux/init.h>
+#include <xen/hvc-console.h>
 
 extern void printch(int);
 
@@ -50,7 +51,16 @@ asmlinkage void early_printk(const char *fmt, ...)
 
 static int __init setup_early_printk(char *buf)
 {
-	register_console(&early_console);
+	if (!buf) {
+		register_console(&early_console);
+		return 0;
+	}
+
+#ifdef CONFIG_HVC_XEN
+	if (!strncmp(buf, "xen", 3))
+		register_console(&xenboot_console);
+#endif
+
 	return 0;
 }
 

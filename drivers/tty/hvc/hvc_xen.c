@@ -611,7 +611,7 @@ static void xenboot_write_console(struct console *console, const char *string,
 	unsigned int linelen, off = 0;
 	const char *pos;
 
-	if (!xen_pv_domain())
+	if (!xen_domain())
 		return;
 
 	dom0_write_console(0, string, len);
