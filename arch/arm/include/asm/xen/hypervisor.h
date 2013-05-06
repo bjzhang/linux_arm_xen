@@ -4,6 +4,12 @@
 extern struct shared_info *HYPERVISOR_shared_info;
 extern struct start_info *xen_start_info;
 
+#ifdef CONFIG_XEN
+void xen_early_init(void);
+#else
+static void inline xen_early_init(void) { return; }
+#endif
+
 /* Lazy mode for batching updates / context switch */
 enum paravirt_lazy_mode {
 	PARAVIRT_LAZY_NONE,

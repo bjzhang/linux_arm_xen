@@ -55,6 +55,7 @@
 #include <asm/unwind.h>
 #include <asm/memblock.h>
 #include <asm/virt.h>
+#include <asm/xen/hypervisor.h>
 
 #include "atags.h"
 #include "tcm.h"
@@ -768,6 +769,7 @@ void __init setup_arch(char **cmdline_p)
 
 	arm_dt_init_cpu_maps();
 	psci_init();
+	xen_early_init();
 #ifdef CONFIG_SMP
 	if (is_smp()) {
 		if (!mdesc->smp_init || !mdesc->smp_init()) {

@@ -196,6 +196,20 @@ static void xen_power_off(void)
  * documentation of the Xen Device Tree format.
  */
 #define GRANT_TABLE_PHYSADDR 0
+
+void __init xen_early_init(void)
+{
+	struct device_node *node;
+
+	node = of_find_compatible_node(NULL, NULL, "xen,xen");
+	if (!node) {
+		pr_debug("No Xen support\n");
+		return;
+	}
+
+	xen_domain_type = XEN_HVM_DOMAIN;
+}
+
 static int __init xen_guest_init(void)
 {
 	struct xen_add_to_physmap xatp;
@@ -208,10 +222,6 @@ static int __init xen_guest_init(void)
 	struct resource res;
 
 	node = of_find_compatible_node(NULL, NULL, "xen,xen");
-	if (!node) {
-		pr_debug("No Xen support\n");
-		return 0;
-	}
 	s = of_get_property(node, "compatible", &len);
 	if (strlen(xen_prefix) + 3  < len &&
 			!strncmp(xen_prefix, s, strlen(xen_prefix)))
