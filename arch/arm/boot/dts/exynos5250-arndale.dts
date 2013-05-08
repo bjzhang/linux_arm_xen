@@ -8,7 +8,7 @@
 	model = "Insignal Arndale evaluation board based on EXYNOS5250";
 
 	chosen {
-		bootargs = "dom0_mem=256M sync_console console=com1,dbgp com1=serial0";
+		bootargs = "dom0_mem=256M sync_console console=dtuart,dbgp dtuart=serial0";
 		xen,dom0-bootargs = "console=hvc0,115200n8 debug root=/dev/mmcblk1p2 ignore_loglevel rw rootwait earlyprintk=xen";
 		modules {
 			module@0 {
