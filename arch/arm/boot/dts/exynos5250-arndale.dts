@@ -68,6 +68,7 @@
 	psci {
 		compatible      = "arm,psci";
 		method          = "hvc";
+		cpu_off		= <1>;
 		cpu_on          = <2>;
 	};
 
