@@ -25,6 +25,7 @@
 #include <mach/regs-pmu.h>
 
 #include <plat/cpu.h>
+#include <xen/xen.h>
 
 #include "common.h"
 
@@ -150,7 +151,7 @@ static int exynos4_enter_lowpower(struct cpuidle_device *dev,
 	int new_index = index;
 
 	/* This mode only can be entered when other core's are offline */
-	if (num_online_cpus() > 1)
+	if (num_online_cpus() > 1 || xen_initial_domain())
 		new_index = drv->safe_state_index;
 
 	if (new_index == 0)
